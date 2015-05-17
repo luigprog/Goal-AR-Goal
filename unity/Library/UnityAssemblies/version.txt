@@ -1,0 +1,5 @@
+4.6.4f1:1.9.9.0
+Android
+C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.4/UnityEngine.UI.dll
+C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.4/Editor/UnityEditor.UI.dll
+C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll

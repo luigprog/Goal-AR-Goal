@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="ArCard" size="50.000000 71.093750" />
+    <ImageTarget name="MKA_Premium_Shao_Sindel" size="50.000000 70.800781" />
+  </Tracking>
+</QCARConfig>
