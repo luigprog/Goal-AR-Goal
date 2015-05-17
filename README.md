@@ -5,3 +5,6 @@ There is 2 versions, PC and Android. The Android's version uses augmented realit
 
 # Videos
 Pc online versus demo: https://www.youtube.com/watch?v=2kErF0KoMbw
+
+# Download
+https://github.com/garcialuigi/GoalArGoal/releases/tag/GoalArGoal
