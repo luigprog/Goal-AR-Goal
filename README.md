@@ -5,8 +5,8 @@ There is 2 versions, PC and Android. The Android's version uses augmented realit
 The network design is based on an authoritative server.
 
 # Videos
-Pc online versus full match: https://www.youtube.com/watch?v=4hNYw7OQO1A
-Pc online versus demo: https://www.youtube.com/watch?v=2kErF0KoMbw
+- Pc online versus full match: https://www.youtube.com/watch?v=4hNYw7OQO1A
+- Pc online versus demo: https://www.youtube.com/watch?v=2kErF0KoMbw
 
 # Download
 https://github.com/garcialuigi/GoalArGoal/releases/tag/GoalArGoal
