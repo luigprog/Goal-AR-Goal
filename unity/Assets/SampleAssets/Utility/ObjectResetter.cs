@@ -39,10 +39,10 @@ namespace UnitySampleAssets.Utility
 
             transform.position = originalPosition;
             transform.rotation = originalRotation;
-            if (rigidbody)
+            if (GetComponent<Rigidbody>())
             {
-                rigidbody.velocity = Vector3.zero;
-                rigidbody.angularVelocity = Vector3.zero;
+                GetComponent<Rigidbody>().velocity = Vector3.zero;
+                GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             }
 
             SendMessage("Reset");

@@ -14,17 +14,16 @@ public class MovementInput
     /// <returns>The direction normalized.</returns>
     public static Vector3 GetMovementDirectionVector()
     {
-        #if UNITY_ANDROID
-        Debug.Log(GuiCircleMovement.instance.GetMovementDirection());
+#if UNITY_ANDROID
         return GuiCircleMovement.instance.GetMovementDirection();
-        #else
+#else
         return new Vector3()
         {
             x = Input.GetAxis("Horizontal"),
-            y = 0,
+            y = 0.0f,
             z = Input.GetAxis("Vertical")
         }.normalized;
-        #endif
+#endif
     }
 
 }

@@ -30,7 +30,7 @@ namespace UnitySampleAssets.CrossPlatformInput.Inspector
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
                 case BuildTarget.Android:
-                case BuildTarget.iPhone:
+                case BuildTarget.iOS:
                 case BuildTarget.WP8Player:
                 case BuildTarget.BlackBerry:
                     EditorUtility.DisplayDialog("Mobile Input",
@@ -62,7 +62,7 @@ namespace UnitySampleAssets.CrossPlatformInput.Inspector
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
                 case BuildTarget.Android:
-                case BuildTarget.iPhone:
+                case BuildTarget.iOS:
                 case BuildTarget.WP8Player:
                 case BuildTarget.BlackBerry:
                     EditorUtility.DisplayDialog("Mobile Input",
@@ -86,7 +86,7 @@ namespace UnitySampleAssets.CrossPlatformInput.Inspector
                 BuildTargetGroup.Standalone,
                 BuildTargetGroup.WebPlayer,
                 BuildTargetGroup.Android,
-                BuildTargetGroup.iPhone,
+                BuildTargetGroup.iOS,
                 BuildTargetGroup.WP8,
                 BuildTargetGroup.BlackBerry,
             };
@@ -94,7 +94,7 @@ namespace UnitySampleAssets.CrossPlatformInput.Inspector
         private static BuildTargetGroup[] mobileBuildTargetGroups = new BuildTargetGroup[]
             {
                 BuildTargetGroup.Android,
-                BuildTargetGroup.iPhone,
+                BuildTargetGroup.iOS,
                 BuildTargetGroup.WP8,
                 BuildTargetGroup.BlackBerry,
             };

@@ -10,24 +10,38 @@ public class PlayerShoot : MonoBehaviour
     #region Fields
     // inspector
     public float minPower;
+
     public float maxPower;
+
     public float curve;
+
     public GameObject shootEffect;
     // others
     private GameObject ball;
+
     private BallInfo ballInfo; // ball component info
+
+    /// <summary>
+    /// Slider used to measure the shoot's power.
+    /// These crazy values is set while debugging, this is not meant to change.
+    /// </summary>
     private Slider sliderDistance = new Slider(4.111784f, 6.408222f);
+
     private PlayerInfo playerInfo;
+
+    private NetworkView myNetworkView;
+
     #endregion
 
     #region Initiators
 
-    void Awake()
+    private void Awake()
     {
         playerInfo = GetComponent<PlayerInfo>();
+        myNetworkView = GetComponent<NetworkView>();
     }
 
-    void Start()
+    private void Start()
     {
         ball = GameObject.FindGameObjectWithTag("Ball");
         ballInfo = ball.GetComponent<BallInfo>();
@@ -54,7 +68,7 @@ public class PlayerShoot : MonoBehaviour
                 } 
                 else 
                 {
-                    networkView.RPC("ShootOn", RPCMode.Server);
+                    myNetworkView.RPC("ShootOn", RPCMode.Server);
                 }
             }
 
@@ -66,7 +80,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    networkView.RPC("ShootOff", RPCMode.Server);
+                    myNetworkView.RPC("ShootOff", RPCMode.Server);
                 }
             }
 #else
@@ -78,7 +92,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    networkView.RPC("ShootOn", RPCMode.Server);
+                    myNetworkView.RPC("ShootOn", RPCMode.Server);
                 }
             }
 
@@ -90,7 +104,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    networkView.RPC("ShootOff", RPCMode.Server);
+                    myNetworkView.RPC("ShootOff", RPCMode.Server);
                 }
             }
 #endif
@@ -105,10 +119,14 @@ public class PlayerShoot : MonoBehaviour
                 // we can also think about this curve direction vector, as the right vector of the "kick"
 
                 Vector3 curveDirection = Vector3.zero;
-                if (MovementInput.GetMovementDirectionVector().x > 0)
+                if (MovementInput.GetMovementDirectionVector().x > 0.0f)
+                {
                     curveDirection = Vector3.Cross(ballInfo.GetLastKickDirection(), Vector3.up);
-                else if (MovementInput.GetMovementDirectionVector().x < 0)
+                }
+                else if (MovementInput.GetMovementDirectionVector().x < 0.0f)
+                {
                     curveDirection = -Vector3.Cross(ballInfo.GetLastKickDirection(), Vector3.up);
+                }
 
                 if (curveDirection != Vector3.zero)
                 {
@@ -118,7 +136,7 @@ public class PlayerShoot : MonoBehaviour
                     }
                     else
                     {
-                        networkView.RPC("ApplyCurve", RPCMode.Server, curveDirection * curve);
+                        myNetworkView.RPC("ApplyCurve", RPCMode.Server, curveDirection * curve);
                     }
                 }
             }
@@ -135,17 +153,17 @@ public class PlayerShoot : MonoBehaviour
         ball = other.gameObject; // refresh the ball reference
 
         // get the distance between the player and the ball
-        float currDistance = Vector3.Distance(new Vector3(transform.position.x, 0, transform.position.z),
-                                   new Vector3(ball.transform.position.x, 0, ball.transform.position.z));
+        float currDistance = Vector3.Distance(new Vector3(transform.position.x, 0.0f, transform.position.z),
+                                   new Vector3(ball.transform.position.x, 0.0f, ball.transform.position.z));
         // calculate the shoot's power based on this distance
         float powerPoint = sliderDistance.GetPoint(currDistance);
         float powerValue = new Slider(maxPower, minPower).GetValue(powerPoint);
 
         Vector3 shootDirection = (ball.transform.position - gameObject.transform.position).normalized;
 
-        ball.rigidbody.AddForce(shootDirection * powerValue);
+        ballInfo.MyRigidbody.AddForce(shootDirection * powerValue);
         // set the kick information
-        ballInfo.gameObject.networkView.RPC("SetLastKickInfo", RPCMode.All, gameObject.name, shootDirection);
+        ballInfo.MyNetworkView.RPC("SetLastKickInfo", RPCMode.All, gameObject.name, shootDirection);
     }
 
     #endregion
@@ -161,7 +179,7 @@ public class PlayerShoot : MonoBehaviour
     [RPC]
     private void ApplyCurve(Vector3 curveForce)
     {
-        ball.rigidbody.AddForce(curveForce);
+        ballInfo.MyRigidbody.AddForce(curveForce);
     }
 
     /// <summary>

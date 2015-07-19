@@ -36,8 +36,8 @@ namespace UnitySampleAssets.Utility
             if (!springJoint)
             {
                 var go = new GameObject("Rigidbody dragger");
-                Rigidbody body = go.AddComponent("Rigidbody") as Rigidbody;
-                springJoint = (SpringJoint) go.AddComponent("SpringJoint");
+                Rigidbody body = go.AddComponent<Rigidbody>() as Rigidbody;
+                springJoint = (SpringJoint) go.AddComponent<SpringJoint>();
                 body.isKinematic = true;
             }
 
@@ -84,8 +84,8 @@ namespace UnitySampleAssets.Utility
 
         private Camera FindCamera()
         {
-            if (camera)
-                return camera;
+            if (GetComponent<Camera>())
+                return GetComponent<Camera>();
             
                 return Camera.main;
         }

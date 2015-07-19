@@ -11,22 +11,42 @@ public class BallInfo : MonoBehaviour
     /// The name of the last player who kicked the ball
     /// </summary>
     private string lastKickerName = "";
-    
+
     /// <summary>
     /// The direction of the last kick.
     /// This is used to curve the ball properly.
     /// </summary>
     private Vector3 lastKickDirection = Vector3.zero;
 
-    public bool canCurve = false;
+    private Rigidbody myRigidbody;
 
-    void OnCollisionEnter(Collision collision)
+    private NetworkView myNetworkView;
+
+    private bool canCurve = false;
+
+    public Rigidbody MyRigidbody
+    {
+        get { return myRigidbody; }
+    }
+
+    public NetworkView MyNetworkView
+    {
+        get { return myNetworkView; }
+    }
+
+    private void Awake()
+    {
+        myRigidbody = GetComponent<Rigidbody>();
+        myNetworkView = GetComponent<NetworkView>();
+    }
+
+    private void OnCollisionEnter(Collision collision)
     {
         // only executed in the server
         if (Network.isServer && collision.gameObject.name != "ground" && collision.gameObject.name != lastKickerName)
         {
             // ball collided with something else, set the can curve to false
-            networkView.RPC("SetCanCurveFalse", RPCMode.All);
+            myNetworkView.RPC("SetCanCurveFalse", RPCMode.All);
         }
     }
 
@@ -43,9 +63,13 @@ public class BallInfo : MonoBehaviour
     public bool CanApplyCurve(GameObject p)
     {
         if (p.gameObject.name == lastKickerName && canCurve)
+        {
             return true;
+        }
         else
+        {
             return false;
+        }
     }
 
     /// <summary>
@@ -55,7 +79,7 @@ public class BallInfo : MonoBehaviour
     /// <param name="kickerName"></param>
     /// <param name="kickDirection"></param>
     [RPC]
-    public void SetLastKickInfo(string kickerName, Vector3 kickDirection) 
+    public void SetLastKickInfo(string kickerName, Vector3 kickDirection)
     {
         lastKickerName = kickerName;
         lastKickDirection = kickDirection;
@@ -63,7 +87,7 @@ public class BallInfo : MonoBehaviour
     }
 
     [RPC]
-    private void SetCanCurveFalse() 
+    private void SetCanCurveFalse()
     {
         canCurve = false;
     }

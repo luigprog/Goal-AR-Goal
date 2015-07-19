@@ -2,6 +2,9 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Virtual stick extension.
+/// </summary>
 public class GuiCircleMovement : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, IDragHandler
 {
     public static GuiCircleMovement instance;
@@ -21,7 +24,7 @@ public class GuiCircleMovement : MonoBehaviour, IPointerUpHandler, IPointerDownH
         direction.Normalize();
 
         direction3d.x = direction.x;
-        direction3d.y = 0;
+        direction3d.y = 0.0f;
         direction3d.z = direction.y;
     }
 
@@ -37,7 +40,7 @@ public class GuiCircleMovement : MonoBehaviour, IPointerUpHandler, IPointerDownH
         direction.Normalize();
 
         direction3d.x = direction.x;
-        direction3d.y = 0;
+        direction3d.y = 0.0f;
         direction3d.z = direction.y;
     }
 
@@ -45,5 +48,4 @@ public class GuiCircleMovement : MonoBehaviour, IPointerUpHandler, IPointerDownH
     {
         return direction3d;
     }
-
 }

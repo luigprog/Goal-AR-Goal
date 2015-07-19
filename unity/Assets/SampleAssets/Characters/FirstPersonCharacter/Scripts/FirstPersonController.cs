@@ -85,8 +85,8 @@ namespace UnitySampleAssets.Characters.FirstPerson
 
         private void PlayLandingSound()
         {
-            audio.clip = _landSound;
-            audio.Play();
+            GetComponent<AudioSource>().clip = _landSound;
+            GetComponent<AudioSource>().Play();
             _nextStep = _stepCycle + .5f;
         }
 
@@ -132,8 +132,8 @@ namespace UnitySampleAssets.Characters.FirstPerson
 
         private void PlayJumpSound()
         {
-            audio.clip = _jumpSound;
-            audio.Play();
+            GetComponent<AudioSource>().clip = _jumpSound;
+            GetComponent<AudioSource>().Play();
         }
 
         private void ProgressStepCycle(float speed)
@@ -155,11 +155,11 @@ namespace UnitySampleAssets.Characters.FirstPerson
             // pick & play a random footstep sound from the array,
             // excluding sound at index 0
             int n = Random.Range(1, _footstepSounds.Length);
-            audio.clip = _footstepSounds[n];
-            audio.PlayOneShot(audio.clip);
+            GetComponent<AudioSource>().clip = _footstepSounds[n];
+            GetComponent<AudioSource>().PlayOneShot(GetComponent<AudioSource>().clip);
             // move picked sound to index 0 so it's not picked next time
             _footstepSounds[n] = _footstepSounds[0];
-            _footstepSounds[0] = audio.clip;
+            _footstepSounds[0] = GetComponent<AudioSource>().clip;
         }
 
         private void UpdateCameraPosition(float speed)

@@ -7,7 +7,7 @@ using System.Collections;
 public class PcCameraFollow : MonoBehaviour
 {
     public Transform target = null;
-    public float smooth = 1;
+    public float smooth = 1.0f;
 
     void Update()
     {

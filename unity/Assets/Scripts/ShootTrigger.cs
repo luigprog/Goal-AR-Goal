@@ -3,7 +3,7 @@ using System.Collections;
 
 /// <summary>
 /// Component class attached to the shootEffect objet in both players.
-/// This will trigger and send a message to the player that the kick area hit the ball.
+/// This will trigger and send a message to the player that the kick area has hit the ball.
 /// </summary>
 public class ShootTrigger : MonoBehaviour
 {
@@ -11,6 +11,8 @@ public class ShootTrigger : MonoBehaviour
     {
         // only in the server
         if (Network.isServer && other.gameObject.tag == "Ball")
+        {
             transform.parent.gameObject.SendMessage("OnShootEffectTriggerEnter", other);
+        }
     }
 }

@@ -64,7 +64,7 @@ namespace UnitySampleAssets.Utility
                             targetBehaviour.enabled = true;
                         break;
                     case Mode.Animate:
-                        if (targetGameObject != null) targetGameObject.animation.Play();
+                        if (targetGameObject != null) targetGameObject.GetComponent<Animation>().Play();
                         break;
                     case Mode.Deactivate:
                         if (targetGameObject != null) targetGameObject.SetActive(false);
